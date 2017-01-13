@@ -4,6 +4,6 @@ This tutorial wants to show you how easy is build web crawler using [APIFier](ht
 
 ### Table of Contents:
 
-1. How to Setup and Run Easy Crawler using APIFier
+1. [How to Setup and Run Easy Crawler using APIFier](./easy-crawler-using-APIFier.md)
 2. How to Build Simple Site Based on Node.js using Meteor
 3. How to Refresh Data after Crawler finished
