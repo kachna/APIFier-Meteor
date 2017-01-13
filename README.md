@@ -1,37 +1,9 @@
-## Welcome to GitHub Pages
+##  How to Build Aggregator Web Appliation based on Node.js using Meteor and APIFier
 
-You can use the [editor on GitHub](https://github.com/kachna/APIFier-Meteor-aggregator/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+This tutorial wants to show you how easy is build web crawler using [APIFier](https://apifier.com) to download various kinds of data from internet combinate them and serve them on aggregator web application based on Node.js using [Meteor framework](https://www.meteor.com).
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Table of Contents:
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kachna/APIFier-Meteor-aggregator/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+1. How to Setup and Run Easy Crawler using APIFier
+2. How to Build Simple Site Based on Node.js using Meteor
+3. How to Refresh Data after Crawler finished
