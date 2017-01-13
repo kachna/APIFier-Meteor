@@ -1,6 +1,5 @@
 ---
 title: How to Build Aggregator Web Appliation based on Node.js using Meteor and APIFier
-layout: post
 ---
 
 
