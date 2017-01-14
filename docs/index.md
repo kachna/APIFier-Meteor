@@ -21,6 +21,6 @@ In this series of posts I want to show you how easy is built simple web applicat
 ### Table of Contents:
 
 1. JavaScript basics
-2. [How to Setup and Run Easy Crawler using APIFier](./_posts/easy-crawler-using-APIFier)
+2. [How to Setup and Run Easy Crawler using APIFier](./2017/01/14/easy-crawler-using-APIFier)
 3. How to Build Simple Site Based on Node.js using Meteor
 4. How to Refresh Data after Crawler finished
