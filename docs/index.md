@@ -8,7 +8,7 @@ layout: default
 
 ## About
 
-JavaScript is here in full power and rolling the web (God save us!). Dynamic webpages are full of it and Node.js is backbone of many servers. I didn't choose it but I have to use it. It is time to stand up and face to JavaScript.
+JavaScript is here in full power and ruling the web (God save us!). Dynamic web pages are full of it and Node.js is backbone of many servers. I didn't choose it but I have to use it. It is time to stand up and face to JavaScript.
 
 In this series of posts I want to show you how easy is built simple web application aggregating offers from many different e-commerce websites. I will use only JavaScript for coding web application and also for crawlers downloading data.
 
