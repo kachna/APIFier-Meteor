@@ -12,9 +12,11 @@ JavaScript is here in full power and ruling the web (God save us!). Dynamic web 
 
 In this series of posts I want to show you how easy is built simple web application aggregating offers from many different e-commerce websites. I will use only JavaScript for coding web application and also for crawlers downloading data.
 
+Let me introduce main tools:
+
 ## APIFier
 
-[APIFier](http://www.apifier.com) is service providing hosted crawlers for any purposes you can imagine. Crawlers are configured via simple JavaScript function which is included to requested page. This concept let you extract all data presented on the page, scroll page, manipulate dynamic elements, fill and send forms even login and much more. See examples on APIFier​'s homepage [link].
+[APIFier](http://www.apifier.com) is service providing hosted crawlers for any purposes you can imagine. Crawlers are configured via simple JavaScript function which is injected to destination page. This concept let you manipulate complete DOM, extract all data presented on the page, scroll the page, control dynamic elements, fill and send forms even login and much more. See [Example crawlers](https://www.apifier.com/) on APIFier​'s homepage.
 
 ## Meteor
 
