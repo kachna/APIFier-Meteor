@@ -110,6 +110,6 @@ Everything is ready. Go to **Run console** section and hit the Run button. Crawl
 
 So hit the Run button and watch the miracle! The result should be similar to fallowing screen shot.
 
-![First crawler configuration and result screen shot]({{ site.url }}/assets/img/screenshots/first-crawler-screen.jpg)
+![First crawler configuration and result screen shot]({{ site.github.url }}/assets/img/screenshots/first-crawler-screen.jpg)
 
 names, prices and discount in percents for all offers on first page.
