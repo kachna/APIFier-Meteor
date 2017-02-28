@@ -4,7 +4,7 @@ layout: default
 ---
 
 
-##  How to Build Aggregator Web Appliation based on Node.js using Meteor and APIFier
+##  How to Build Aggregator Web Application based on Node.js using Meteor and APIFier
 
 ## About
 
@@ -19,11 +19,13 @@ Let me introduce main tools:
 [APIFier](http://www.apifier.com) is service providing hosted crawlers for any purposes you can imagine. Crawlers are configured via simple JavaScript function which is injected to destination page. This concept let you manipulate complete DOM, extract all data presented on the page, scroll the page, control dynamic elements, fill and send forms even login and much more. See [Example crawlers](https://www.apifier.com/) on APIFier​'s homepage.
 
 ## Meteor
-
+[Meteor](http://www.meteor.com) is full stack JavaScript framework using [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/) on back end. It supports Angular, React  and Blaze on front end. For simplicity [Blaze](http://blazejs.org/) will be used in this tutorial because it is easy to learn and enough powerful for most web design cases.
 
 ### Table of Contents:
 
 1. JavaScript basics
 2. [How to Setup and Run Easy Crawler using APIFier](./easy-crawler-using-APIFier)
-3. How to Build Simple Site Based on Node.js using Meteor
-4. How to Refresh Data after Crawler finished
+3. How to Build Simple Meteor Application
+4. How to Import and Refresh Data after Crawler finished
+5. More Crawlers
+6. Meteor Application Hosting
