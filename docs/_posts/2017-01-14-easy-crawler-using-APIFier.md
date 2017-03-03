@@ -471,7 +471,9 @@ function pageFunction(context) {
 
             // calculate discount
             var discount = 100*saving/originalPrice;
-                      
+
+            console.log('=======' + originalPrice + ' ' + saving + ' ' + discount);
+
             if (discount >= 10) {
 
                 // prepare Request object for Crawler's Queue
@@ -483,6 +485,9 @@ function pageFunction(context) {
 
                 // enqueue Request to Crawler's Queue
                 context.enqueuePage(request);
+
+                // no output to results
+                context.skipOutput();
             }
         }
     } else if (context.request.label == 'offer-detail') {
