@@ -1,5 +1,5 @@
 ---
-date: 2017-03-01
+date: 2017-03-03
 title: How to Setup and Run Web Crawler using APIFier
 layout: post
 ---
@@ -18,7 +18,7 @@ Using developer (free of charge) account you are able to crawl 10 000 (10k) page
 Think before you run crawler. Use Max pages per crawl in Crawler's Advanced settings section. Optimize its page scheduling and loading by careful settings of Pseudo-URLs, Clickable elements and Intercept request function. We will discus this settings in later part of tutorial. For now Advanced settings -> Max pages per crawl is enough.
 
 ### Crawler's goal
-The goal is to extract discounted items from [Currys UK e-shop](http://www.currys.co.uk/). Because Cyrrys offer is exhausting and APIFier's developer plan is limited and this is only tutorial our Crawler should focus only on TVs which are discounted at least 10%. Extension of Crawler to extract more offers is in fact only removing of condition so it will be easy for you when you finish this post.
+The goal is to extract discounted items from [Currys UK e-shop](http://www.currys.co.uk/). Because Cyrrys offer is exhausting and APIFier's developer plan is limited and this is only tutorial our Crawler should focus only on *TVs* which are *discounted at least 10%*. Extension of Crawler to extract more offers is in fact only removing of condition so it will be easy for you when you finish this post.
 
 In the future offers extracted by this Crawler will be aggregated with offers from many other e-shops and they should be filterable and sortable and so on. To fulfill this goal every offer need few parameters:
 
@@ -410,7 +410,7 @@ Watch the URL. Is it familiar?
 
     "url": "http://www.currys.co.uk/gbuk/tv-and-home-entertainment/televisions/televisions/301_3002_30002_xx_xx/1_50/relevance-desc/xx-criteria.html"
 
-Bingo! It is offer listing page. There is nothing written in Page function what to do when Crawler visits offer listings. OK, it has to go there to get all URLs and enqueue all of them matching offer details page but there is nothing extracted so *pageFunction* returns *None* (*null*). But why should be *null* be presented in results? It shouldn't. Fortunately there is Context function called **skipOutput()**. You can add it to the end of function for case when offer details isn't crawled:
+Bingo! It is offer listing page. There is nothing written in Page function what to do when Crawler visits offer listings. OK, it has to go there to get all URLs and enqueue all of them matching offer details page but there is nothing extracted and outputted from offer listing page it self so the *pageFunction* returns *None* (*null*). But why should be *null* be presented in results? It shouldn't. Fortunately there is Context's function called **skipOutput()**. You can add it to the end of Page function for case when offer details page isn't crawled:
 
 {% highlight javascript linenos %}
 
@@ -439,6 +439,7 @@ function pageFunction(context) {
 }
 {% endhighlight %}    
 
+Now the result file is clean. There is only offers from Televisions category with all requested attributes. But the [goal](#crawlers-goal) still isn't fulfilled yet. The goal says TVs discounted at least 10%
 
 
 ### Crawl only discounted offers
@@ -448,3 +449,65 @@ TODO
 #### Enqueue URL manually
 
 TODO
+
+Complete Page function code:
+
+{% highlight javascript linenos %}
+
+function pageFunction(context) {
+    // called on every page the crawler visits, use it to extract data from it
+    var $ = context.jQuery;
+
+    if (context.request.label == 'listing-page') {
+
+        var offers = $('article.product.result-prd');
+
+        // iterate through offers
+        for (var i = 0; i < offers.length; i++) {
+
+            // extract original price and savings to calculate dicdount
+            var saving = Number($('strong.saving', offers[i]).text().slice(6).replace(',', ''));
+            var originalPrice = Number($('span.past-amount strong', offers[i]).text().slice(5).replace(',', ''));
+
+            // calculate discount
+            var discount = 100*saving/originalPrice;
+                      
+            if (discount >= 10) {
+
+                // prepare Request object for Crawler's Queue
+                var request = {
+                    url: $('a.in', offers[i]).attr('href'),
+                    method: 'GET',
+                    label: 'offer-detail',
+                };
+
+                // enqueue Request to Crawler's Queue
+                context.enqueuePage(request);
+            }
+        }
+    } else if (context.request.label == 'offer-detail') {
+
+        // extract required attributes from offer details page
+        var result = {
+            type: $('h1 span').eq(1).text().trim(),
+            brand: $('h1 span').eq(0).text().trim(),
+            originalPrice: Number($('div.prd-past-amounts span').eq(0).text().slice(1).replace(',', '')),
+            currentPrice: Number($('div.amounts strong.current').eq(0).text().slice(1).replace(',', '')),
+            discount: Math.round(Number($('div.amounts[data-discountpercent]').attr('data-discountpercent'))),
+            resolution: $('table.simpleTable tr:contains("Resolution") td').text().trim(),
+            image: $('li.prd-image.current a').attr('href')
+        };
+
+        // return offer attibutes to result collection
+        return result;
+
+    } else {
+
+        // do and output notihing if visits page other than listing or details
+        // this should not happend
+        context.skipOutput();
+    }
+
+}
+
+{% endhighlight %}
