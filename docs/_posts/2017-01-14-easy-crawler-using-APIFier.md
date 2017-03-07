@@ -1,5 +1,5 @@
 ---
-date: 2017-03-03
+date: 2017-03-08
 title: How to Setup and Run Web Crawler using APIFier
 layout: post
 ---
@@ -122,7 +122,7 @@ So hit Run button and watch the miracle! The result should be similar to fallowi
 
 Yes, it works! But crawler outputs "Televisions". This isn't much helpful. You have to force crawler to find something what we didn't know before.
 
-#### Extract more data
+### Extract more data
 Lets change Page function to extract all offers. You have to find offer selectors. Right click on offer, choose Inspect. If right clicked let say on offers image you can see image selector. You have to walk up through the DOM tree until you reach offer element. In Chrome DevTools you can swipe over element on Elements tab by mouse and appropriate elements are highlighted on page. If you click the element the selector on the bottom of tab is change.
 
 ![How to find elements selector using Chrome DevTools]({{ site.github.url }}/assets/img/screenshots/chrome-devtools-selectors.jpg)
@@ -130,12 +130,13 @@ The right selector is:
 
     article.product.result-prd
 
-jQure will find all elements matching this selector. You can check it in Chrome DevTools [Console](https://developers.google.com/web/tools/chrome-devtools/console/). Try to write on the bottom of Console tab
+jQuery will find all elements matching this selector. You can check it in Chrome DevTools [Console](https://developers.google.com/web/tools/chrome-devtools/console/). Try to write on the bottom of Console tab
 
     $('article.product.result-prd')
 
 and hit Enter. If you click on small grey triangle leading the result you will see list of offer elements (article tags).
 
+#### Injecting jQuery to page
 Here is good to remember that **not all web pages including jQuery**. This is the reason why APIFier inject it to page for you. If you trying to extract data from page without jQuery you can do the same as APIFIer. To inject jQuery into any page execute in Chrome Console
 
     javascript:(function(){function l(u,i){
@@ -143,7 +144,7 @@ Here is good to remember that **not all web pages including jQuery**. This is th
 
 More about injecting jQuery to page on [StackOverflow](http://stackoverflow.com/questions/26573076/how-to-inject-jquery-to-any-webpage). There are also Chrome extension to inject jQuery to page.
 
-Now you have all offers on page. The next step is to find name and price. Price is easy. It is strong tag with class price. The selector will be:
+Now you have all offers on page so you can walk them one by one. The next step is to find name and price. Price is easy. It is strong tag with class price. The selector will be:
 
     strong.price
 
@@ -410,7 +411,9 @@ Watch the URL. Is it familiar?
 
     "url": "http://www.currys.co.uk/gbuk/tv-and-home-entertainment/televisions/televisions/301_3002_30002_xx_xx/1_50/relevance-desc/xx-criteria.html"
 
-Bingo! It is offer listing page. There is nothing written in Page function what to do when Crawler visits offer listings. OK, it has to go there to get all URLs and enqueue all of them matching offer details page but there is nothing extracted and outputted from offer listing page it self so the *pageFunction* returns *None* (*null*). But why should be *null* be presented in results? It shouldn't. Fortunately there is Context's function called **skipOutput()**. You can add it to the end of Page function for case when offer details page isn't crawled:
+Bingo! It is offer listing page. There is nothing written in Page function what to do when Crawler visits offer listings.
+
+Crawler has to go to offers listing page to get all URLs and enqueue all of them matching offer details page but there is nothing extracted and outputted from offer listing page it self, so the *pageFunction* returns *None* (*null*). But why should be *null* be presented in results? It shouldn't. Fortunately there is Context's function called **skipOutput()**. You can add it to the end of Page function for case when offer details page isn't crawled:
 
 {% highlight javascript linenos %}
 
@@ -439,18 +442,36 @@ function pageFunction(context) {
 }
 {% endhighlight %}    
 
-Now the result file is clean. There is only offers from Televisions category with all requested attributes. But the [goal](#crawlers-goal) still isn't fulfilled yet. The goal says TVs discounted at least 10%
+Now the result file is clean. There is only offers from Televisions category with all requested attributes. But the [goal](#crawlers-goal) still isn't fulfilled yet. The goal says TVs discounted at least 10%. There is no need to calculate all offers details.
 
 
 ### Crawl only discounted offers
 
-TODO
+First, you have walk through all offers on listing page as you did in [Exporting more data](#exporting-more-data) section before. Than you need to calculate the discount for each offer and decide to visit details page to output data about offer or not. One possibility is calculate discount from *originalPrice* and *saving*.
+
+    var saving = Number($('strong.saving', offers[i]).text().slice(6).replace(',', ''));
+    var originalPrice = Number($('span.past-amount strong', offers[i]).text().slice(5).replace(',', ''));
+
+I there is no string tag with class *saving* (which is not when offer is not discounted) then jQuery returns empty string. Fortunately, *Number()* represents empty string as zero. It cause that fallowing calculation is always valid and for non presented *saving* is *discount* zero.
+
+    var discount = 100*saving/originalPrice;
+
+You can log discount amount for future debugging purposes. You can use standard *Console* object and its function [*log()*](https://developer.mozilla.org/en/docs/Web/API/Console/log). The result can be watched in *log* tab of *Run console*.
+
+    console.log(originalPrice + ' ' + saving + ' ' + discount);
 
 #### Enqueue URL manually
+With discount Crawler can choose it offer details has to be visited. For this purpose *Context* has function *enqueuePage(request)* which takes [*Request*](https://www.apifier.com/docs#requestObject) object as parameter. To enqueue offers detail page you will have to fill only three attributes of Request object.
 
-TODO
+**url** is URL address of page which is being enqueued.
 
-Complete Page function code:
+**method** is [HTTP method](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods) used to request page. In most cases it will be GET sometimes POST is used when there is need to send some data to server. Other methods are useful rarely.
+
+**label** is textual label knowen from *Start URLs* and *Crawler Pseudo-URLs*. It can be specified directly without proper *Crawler Pseudo-URLs* group.
+
+Pages enqueued manually (using *enqueuePage()*) are always puted into Crawler's Queue without any *Crawler Pseudo-URLs* checking. The Request object to enqueue offer detail page on lines 24 - 29 of Crawler's [*pageFunction* complete code](#complete-page-function-code).
+
+### Complete Page function code
 
 {% highlight javascript linenos %}
 
@@ -474,6 +495,7 @@ function pageFunction(context) {
 
             console.log('=======' + originalPrice + ' ' + saving + ' ' + discount);
 
+            // if discount is hight enough enqueue page
             if (discount >= 10) {
 
                 // prepare Request object for Crawler's Queue
@@ -486,10 +508,12 @@ function pageFunction(context) {
                 // enqueue Request to Crawler's Queue
                 context.enqueuePage(request);
 
-                // no output to results
-                context.skipOutput();
             }
         }
+
+        // no output to results
+        context.skipOutput();
+
     } else if (context.request.label == 'offer-detail') {
 
         // extract required attributes from offer details page
@@ -516,3 +540,8 @@ function pageFunction(context) {
 }
 
 {% endhighlight %}
+
+Run it and enjoy it! Finally the [goal](#crawlers-goal) is done. You have crawled first data from Internet. If you've read this far you are probably start to realize how incredible data can be crawled proceeded and analyzed. But remember: **Crawl responsibly!**
+
+### Speed up the crawler
+Yes, its true. Work is never done. There is still so much to learn and to much space for improvement. Try to tune up your Crawler by using Advanced settings section to [speeding it up](./speedup-crawler).

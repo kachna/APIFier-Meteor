@@ -31,3 +31,4 @@ Let me introduce main tools:
 4. How to Import and Refresh Data after Crawler finished
 5. More Crawlers
 6. Meteor Application Hosting
+7. [Speedup crawler](./speedup-crawler)
