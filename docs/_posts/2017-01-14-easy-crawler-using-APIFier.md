@@ -541,7 +541,7 @@ function pageFunction(context) {
 
 {% endhighlight %}
 
-Run it and enjoy it! Finally the [goal](#crawlers-goal) is done. You have crawled first data from Internet. If you've read this far you are probably start to realize how incredible data can be crawled proceeded and analyzed. But remember: **Crawl responsibly!**
+Run it and enjoy it! Finally the [goal](#crawlers-goal) is done. You have crawled first data from the Internet. If you've read this far you have probably start to realize how incredible data can be crawled, proceeded and analyzed. But remember: **Crawl responsibly!**
 
 ### Speed up the crawler
-Yes, its true. Work is never done. There is still so much to learn and to much space for improvement. Try to tune up your Crawler by using Advanced settings section to [speeding it up](./speedup-crawler).
+Yes, it is true. Work is never done. There is still so much to learn and to much space for improvement. Try to tune up your Crawler by using Advanced settings section to [speeding it up](./speedup-crawler).
