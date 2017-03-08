@@ -21,14 +21,14 @@ Let me introduce main tools:
 [APIFier](http://www.apifier.com) is service providing hosted crawlers for any purposes you can imagine. Crawlers are configured via simple JavaScript function which is injected to destination page. This concept let you manipulate complete DOM, extract all data presented on the page, scroll the page, control dynamic elements, fill and send forms even login and much more. See [Example crawlers](https://www.apifier.com/) on APIFier​'s homepage.
 
 ## Meteor
-[Meteor](http://www.meteor.com) is full stack JavaScript framework using [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/) on back end. It supports Angular, React  and Blaze on front end. For simplicity [Blaze](http://blazejs.org/) will be used in this tutorial because it is easy to learn and enough powerful for most web design cases.
+[Meteor](http://www.meteor.com) is full stack JavaScript framework using [Node.js](https://nodejs.org/) and [MongoDB](https://www.mongodb.com/) on back-end. It supports [Angular](https://angularjs.org/), [Blaze](http://blazejs.org/) and [React](https://facebook.github.io/react/) frameworks on front-end. Meteor's front-end adopts concept of Optimistic UI trough DDP([intro](https://meteorhacks.com/introduction-to-ddp/), [specification](https://github.com/meteor/meteor/blob/master/packages/ddp/DDP.md)) and [Minimongo](https://github.com/meteor/meteor/blob/master/packages/minimongo/README.md) to improve user experience. To make it simple as possible [Blaze](http://blazejs.org/) will be used in this tutorial because it is easy to learn and enough powerful for most web design cases.
 
 ### Table of Contents:
 
 1. JavaScript basics
 2. [How to Setup and Run Easy Crawler using APIFier](./easy-crawler-using-APIFier)
 3. How to Build Simple Meteor Application
-4. How to Import and Refresh Data after Crawler finished
-5. More Crawlers
+4. How to Control Crawler from Web Application
 6. Meteor Application Hosting
+5. More Crawlers
 7. [Speedup crawler](./speedup-crawler)
