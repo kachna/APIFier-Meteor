@@ -9,7 +9,7 @@ layout: post
 #### Optimistic UI
 Optimistic UI is concept where front-end do not wait for result from back-end and try to calculate it by itself. Mostly the front-end's result is right and when back-end send its result finally, nothing will happen because every is already done. If the result is differs front-end simply change it.
 
-For example (from [UX Planet](https://uxplanet.org/optimistic-1000-34d9eefe4c05)) modern mobile communicator application using Optimistic UI concept. When user sends the message application display it as send and append small sign that something is happening on background. UI is not blocked and user can prepare another message. If first message is delivered back-end inform front-end (the mobile application) and the sign disappears. If delivery was unsuccessful sign can change to exclamation mark sign and user knows that there were problem.
+Optimistic UI fight against overlays with spinners. For example (from [UX Planet](https://uxplanet.org/optimistic-1000-34d9eefe4c05)) modern mobile communicator application using Optimistic UI concept. When user sends the message application display it as send and append small sign that something is happening on background. UI is not blocked and user can prepare another message. If first message is delivered back-end inform front-end (the mobile application) and the sign disappears. If delivery was unsuccessful sign can change to exclamation mark sign and user knows that there were problem.
 
 ![Working... overlay](https://cdn-images-1.medium.com/max/600/1*N5tK8JB0MmRb04ONghE5mg.gif)
 ![Optimitic UI](https://cdn-images-1.medium.com/max/600/1*KE0p_NCjeeV0Sk9ZAIuE8g.gif)
