@@ -27,7 +27,7 @@ Let me introduce main tools:
 
 1. JavaScript basics
 2. [How to Setup and Run Easy Crawler using APIFier](./easy-crawler-using-APIFier)
-3. How to Build Simple Meteor Application
+3. [How to Build Simple Meteor Application](./how-to-build-simple-meteor-application)
 4. How to Control Crawler from Web Application
 6. Meteor Application Hosting
 5. More Crawlers
