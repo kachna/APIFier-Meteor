@@ -1,0 +1,16 @@
+
+<template name="listing">
+  <ul>
+    {{#each offers}}
+      {{> offer}}
+    {{/each}}
+  </ul>
+</template>
+
+<template name="offer">
+  <li>
+    <div>
+      <a href="{{url}}">{{ type }}</a>
+    </div>
+  </li>
+</template>
