@@ -126,20 +126,20 @@ Back to code. Fallowing previous [Project File Structure](#project-file-structur
 
 In file define interface to all aggregated offers in DB.
 
-<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/api/offers.js"></script>
+<script src="https://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/api/offers.js"></script>
 
 #### Listing template
 Application can access data. Next step is display data to user. Create file and write [Blaze]() template into it:
 
     imports/api/listing.js
 
-<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/ui/listing.js"></script>
+<script src="https://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/ui/listing.js"></script>
 
 Also append HTML part of template.
 
     imports/api/listing.html
 
-<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/ui/listing.html"></script>
+<script src="https://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/ui/listing.html"></script>
 
 
 #### Import to Client and server
@@ -147,11 +147,11 @@ Because Meteor runs only code in *client* and *server* folder you wrote code whi
 
     server/main.js
 
-<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/server/main.js"></script>
+<script src="https://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/server/main.js"></script>
 
     client/main.js
 
-<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/client/main.js"></script>
+<script src="https://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/client/main.js"></script>
 
 
 #### Layout
@@ -160,7 +160,7 @@ And finally add application layout which include listing template.
 
     client/main.html
 
-<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/client/main.html"></script>
+<script src="https://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/client/main.html"></script>
 
 #### List of all offers
 Now go back to your browser and watch
