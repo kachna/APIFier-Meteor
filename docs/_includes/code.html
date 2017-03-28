@@ -1,0 +1,17 @@
+<script>
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      var el = document.getElementById("code-{{include.id}}")
+      console.log(el);
+      console.log(this.responseText);
+      el.innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("GET", "{{include.url}}", true);
+  xhttp.send();
+</script>
+
+<pre>
+  <code id="code-{{include.id}}" class="language-javascript"></code>
+</pre>
