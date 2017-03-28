@@ -126,118 +126,41 @@ Back to code. Fallowing previous [Project File Structure](#project-file-structur
 
 In file define interface to all aggregated offers in DB.
 
-{% highlight javascript linenos %}
-
-// import Meteor's Mongo Collection interface package
-import { Mongo } from 'meteor/mongo';
-
-// export offers collcetion to be able to import it in other files
-export const Offers = new Mongo.Collection('offers');
-
-// on server-side enable data from offers collecion for client-side
-if (Meteor.isServer) {
-  // This code only runs on the server
-  Meteor.publish('offers', function offersPublication() {
-    return Offers.find({});
-  });
-}
-
-{% endhighlight %}
+<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/api/offers.js"></script>
 
 #### Listing template
 Application can access data. Next step is display data to user. Create file and write [Blaze]() template into it:
 
     imports/api/listing.js
 
-    {% highlight javascript linenos %}
-
-    import { Template } from 'meteor/templating';
-
-    // import object representing offers collection
-    import { Offers } from '../api/offers.js';
-
-    //import HTML part of template
-    import './listing.html';
-
-    // wehen templeate is created subscribte for data from offers collection
-    Template.listing.onCreated(function bodyOnCreated() {
-      Meteor.subscribe('offers');
-    });
-
-    Template.listing.helpers({
-      // helper to access data from offers collection
-      offers: function() {
-        return Offers.find({})
-      }
-    })
-
-    {% endhighlight %}
+<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/ui/listing.js"></script>
 
 Also append HTML part of template.
 
     imports/api/listing.html
 
-    {% highlight handlebars linenos %}
+<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/imports/ui/listing.html"></script>
 
-    <template name="listing">
-      <ul>
-        {{#each offers}}
-          {{> offer}}
-        {{/each}}
-      </ul>
-    </template>
-
-    <template name="offer">
-      <li>
-        <div>
-          <a href="{{url}}">{{ type }}</a>
-        </div>
-      </li>
-    </template>
-
-    {% endhighlight %}
 
 #### Import to Client and server
 Because Meteor runs only code in *client* and *server* folder you wrote code which is never run. To force application work you have to first **import offers collection to server** to publish data from DB for clients second **display listing template to user**, which means create layout, import listing template to client folder and put it into layout.
 
     server/main.js
 
-    {% highlight javascript linenos %}
-
-    // import object representing offers collection
-    import { Offers } from '../api/offers.js';
-
-    {% endhighlight %}    
-
+<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/server/main.js"></script>
 
     client/main.js
 
-    {% highlight javascript linenos %}
-
-    // import listing template
-    import '../imports/ui/listing.js';
-
-    {% endhighlight %}    
+<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/client/main.js"></script>
 
 
-    client/main.js
+#### Layout
 
-    {% highlight handlebars linenos %}
+And finally add application layout which include listing template.
 
-    <head>
-      <title>LCD TVs Offer Aggregator</title>
-    </head>
+    client/main.html
 
-    <body>
-      <header>
-        <h1>LCD TVs Offer Aggregator</h1>
-      </header>
-
-      {{> listing}}
-
-    </body>
-
-    {% endhighlight %}    
+<script src="http://gist-it.appspot.com/https://github.com/kachna/APIFier-Meteor/blob/master/aggregator/client/main.html"></script>
 
 #### List of all offers
 Now go back to your browser and watch
